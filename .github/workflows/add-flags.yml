@@ -1,9 +1,12 @@
 name: Auto Add Country Flags
 
 on:
-  workflow_dispatch:          # 允许手动触发
+  workflow_dispatch:          # 手动触发
   schedule:
-    - cron: '0 */12 * * *'   # 每12小时自动跑一次（可改）
+    - cron: '0 */12 * * *'   # 每12小时自动跑一次
+
+permissions:
+  contents: write            # 关键：允许推送代码
 
 jobs:
   add-flags:
@@ -11,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -28,4 +33,9 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add ipv6.txt
-          git diff --quiet && git diff --staged --quiet || (git commit -m "auto: add country flags to ipv6.txt" && git push)
+          if git diff --staged --quiet; then
+            echo "没有变化，跳过提交"
+          else
+            git commit -m "auto: add country flags to ipv6.txt"
+            git push
+          fi
