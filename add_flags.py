@@ -18,8 +18,6 @@ FLAG_MAP = {
 
 def get_country(ip):
     try:
-        # 清理 IPv6 方括号和端口
-        clean_ip = re.sub(r'[\[\]]', '', ip.split(':')[0] if not ip.startswith('[') else ip.split(']:')[0].strip('[]'))
         if ip.startswith('['):
             clean_ip = ip.split(']:')[0].strip('[]')
         else:
@@ -43,12 +41,9 @@ def process_file(input_file="ipv6.txt"):
             results.append(line)
             continue
 
-        # 已经有 # 备注的跳过
-        if "#" in line:
-            results.append(line)
-            continue
-
-        ip_part = line.strip()
+        # 去掉已有的备注，重新处理
+        ip_part = line.split("#")[0].strip()
+        
         country = get_country(ip_part)
         flag = FLAG_MAP.get(country, "🏳️")
         
@@ -56,9 +51,8 @@ def process_file(input_file="ipv6.txt"):
         results.append(new_line)
         print(f"✓ {new_line}")
         
-        time.sleep(1.3)  # 免费接口限速
+        time.sleep(1.3)
 
-    # 加上更新时间
     header = f"# Updated at {datetime.utcnow().strftime('%Y-%m-%d %H:%M')} UTC\n"
     with open(input_file, "w", encoding="utf-8") as f:
         f.write(header + "\n".join(results) + "\n")
