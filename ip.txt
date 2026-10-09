@@ -9,3 +9,13 @@
 104.17.137.19:443#US
 198.41.219.24:443#US
 104.17.152.56:443#US
+www.oopt.eu.cc:2096#HK 联通优选[www.oopt.eu.cc 118ms]
+db-ip.com:8443#HK 联通优选[db-ip.com 139ms]
+www.galgamex.net:8443#US 联通优选[www.galgamex.net 163ms]
+cf.xreak.top:2096#DE 联通优选[cf.xreak.top 164ms]
+fbi.gov:2087#US 联通优选[fbi.gov 166ms]
+www.dg22.top:2087#US 联通优选[www.dg22.top 168ms]
+01-cctv.com:2087#US 联通优选[01-cctv.com 170ms]
+www.mastervolt.com:8443#US 联通优选[www.mastervolt.com 170ms]
+hzytjy.cn:2096#US 联通优选[hzytjy.cn 172ms]
+time.is:2053#US 联通优选[time.is 172ms]
